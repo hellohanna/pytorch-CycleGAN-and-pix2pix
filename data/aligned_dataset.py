@@ -16,9 +16,11 @@ class AlignedDataset(BaseDataset):
         self.opt = opt
         self.root = opt.dataroot
         self.dir_AB = os.path.join(opt.dataroot, opt.phase)
-        self.AB_paths = sorted(make_dataset(self.dir_AB))
+        if opt.isTrain:
+            self.AB_paths = sorted(make_dataset(self.dir_AB))
+        else:
+            self.AB_paths = sorted(make_dataset(self.dir_AB, opt.image))
         assert(opt.resize_or_crop == 'resize_and_crop')
-
     def __getitem__(self, index):
         AB_path = self.AB_paths[index]
         AB = Image.open(AB_path).convert('RGB')

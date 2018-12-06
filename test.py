@@ -26,6 +26,7 @@ if __name__ == '__main__':
     # CycleGAN: It should not affect CycleGAN as CycleGAN uses instancenorm without dropout.
     if opt.eval:
         model.eval()
+
     for i, data in enumerate(dataset):
         if i >= opt.num_test:
             break
